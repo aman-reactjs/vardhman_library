@@ -1,65 +1,113 @@
-import Image from "next/image";
+"use client"
+import Image from 'next/image'
+import React, { useEffect, useState } from 'react'
+import { Button } from "@/components/ui/button"
+import { Phone } from 'lucide-react'
+import Navbar from './components/Navbar'
+import LoginPage from './components/LoginPage'
 
-export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+
+
+const page = () => {
+  const [isOpenNavbar,setIsOpenNavbar]=useState(false)
+  const[isRequestDemo,setIsRequestDemo]=useState(false)
+  const[showNumber, setShowNumber] = useState(false)
+  const image=[
+    '/assets/library_pic1.avif',
+    '/assets/library_pic2.avif',
+    '/assets/library_pic3.avif'
+  ];
+  
+  const[currentIndex,setCurrentIndex]=useState(0)
+  // useEffect ek bar hi render hota hai agar hum last me array lagate hai 
+  useEffect(()=>{
+    // setTimeOut humesha provided time ke baad chalta hai 
+     const trigger =setTimeout(() => {
+      // ye actual logic jai jo work kar rha hai 
+      //isse samajh gye to abhi hi ko samajh gye
+      //isme preIndex currentIndex ki mujhuda index ko le rha hai jo ki abhi 0 hai
+      setCurrentIndex((preIndex)=>
+        preIndex===image.length-1? 0 :preIndex+1
+      )
+     }, 3000);
+     //agar image dubara render hui hai to trigger function delete hoke dubara se banega 
+     return()=> clearTimeout(trigger)
+  },[currentIndex])
+
+useEffect(()=>{
+  if(isRequestDemo){
+    document.body.style.overflow="hidden"
+  }else{
+    document.body.style.overflow="auto"
+  }
+  return()=>{
+    document.body.style.overflow="auto"
+  }
+},[isRequestDemo])
+
+  return <> 
+  <Navbar setIsRequestDemo={setIsRequestDemo} isOpenNavbar={isOpenNavbar} setIsOpenNavbar={setIsOpenNavbar}/>
+  <div id='home' className={`${isOpenNavbar?"bg-black blur-[4px]":""} w-full max-w-96 pt-10 lg:pt-22 md:max-w-[860px] lg:max-w-[1280px] grid md:grid lg:flex justify-center items-center mx-1  lg:mx-auto`}>
+
+    <div className='w-full max-w-96 md:max-w-[840px] lg:max-w-7xl p-3 relative '> 
+      
+      <Image src={image[currentIndex]}  alt='image is not exit'
+      height={0}
+      width={400}
+      className='w-full max-w-7xl h-140 rounded-lg '/>
+  <div className=' absolute inset-3 bg-black/50 rounded-lg p-3 '></div>
+  
+  <div className='absolute inset-3 h-140 bg-linear-to-r from-black/80 via-black-80  to-black-70 rounded-lg grid md:grid lg:flex justify-between'>
+
+  <div className=' w-64 md:w-150 lg:w-80 h-96 bg-yellow-300-50 m-5 md:m-10 lg:m-20 text-white flex flex-col gap-10 my-30 '>
+<h1 className="text-4xl md:text-6xl lg:text-6xl font-bold tracking-wide w-[340px] md:w-[700px] ">SHRI VARDHMAN LIBRARY</h1>
+<p className='font-bold'>Study Without Distractions
+Experience a quiet, comfortable, and premium study space with high-speed WiFi, air conditioning, cold drinking water, clean washrooms, and dedicated relaxation areas.</p>
+<div className='relative inline-block'>
+
+<Button variant="Ghost" className='font-bold w-32 border border-white bg-green-700'
+onClick={()=>{
+     if (window.innerWidth < 768) {
+      window.location.href = "tel:+918755331817";
+    } else {
+      setShowNumber(!showNumber);
+    }
+}}
+> <Phone className='phone-ring' />
+<span className='md:hidden'>
+Call Now
+</span>
+<span className='hidden md:block' onClick={()=>setShowNumber(!showNumber)}>
+  Show Number
+</span>
+</Button>
+{showNumber && 
+
+<div  className='w-32 h-16 bg-black/50 flex flex-col justify-center items-center text-white font-bold font-mono absolute rounded-lg'>
+<p className='flex gap-1'> <Phone height={25} width={15}/> Call Us</p>
+  <h1 className=''>8755331817</h1>
+  </div> 
 }
+  </div>
+   </div>
+
+{/* Register for one day demo */}
+<div className='hidden lg:block'>
+<LoginPage/>
+</div>
+{isRequestDemo && (
+  <div className="fixed inset-x-2 bg-black/40 flex justify-center items-center z-[999] lg:hidden backdrop-blur-sm"
+  onClick={()=>setIsRequestDemo(false )}
+  >
+    <LoginPage setIsRequestDemo={setIsRequestDemo}  showNumber={showNumber} setShowNumber={setShowNumber}  />
+  </div>
+)}
+
+  </div>
+
+  </div>
+  </div>
+  </>
+}
+
+export default page
