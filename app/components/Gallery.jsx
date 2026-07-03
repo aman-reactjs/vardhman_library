@@ -4,14 +4,14 @@ import Image from "next/image";
 
 const Gallery = () => {
 const showImage = [
-"/assets/library_pic1.avif",
-"/assets/library_pic2.avif",
-"/assets/library_pic3.avif",
-"/assets/library_pic4.avif",
-"/assets/library_pic5.avif",
-"/assets/library_pic6.avif",
-"/assets/library_pic5.avif",
-"/assets/library_pic2.avif",
+"/assets/library_real_img/lib_img_2.jpeg",
+"/assets/library_real_img/lib_img_1.jpeg",
+"/assets/library_real_img/lib_img_3.jpeg",
+"/assets/library_real_img/lib_img_6.jpeg",
+"/assets/library_real_img/lib_img_7(1).jpeg",
+"/assets/library_real_img/lib_img_8(2).jpeg",
+"/assets/library_real_img/lib_img_9(3).jpeg",
+'/assets/library_real_img/lib_img_10(4).jpeg'
 ];
 
 return ( 

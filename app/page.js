@@ -15,7 +15,7 @@ const page = () => {
   const image=[
     '/assets/library_pic1.avif',
     '/assets/library_pic2.avif',
-    '/assets/library_pic3.avif'
+    '/assets/library_real_img/lib_img_9(3).jpeg'
   ];
   
   const[currentIndex,setCurrentIndex]=useState(0)
@@ -47,14 +47,14 @@ useEffect(()=>{
 
   return <> 
   <Navbar setIsRequestDemo={setIsRequestDemo} isOpenNavbar={isOpenNavbar} setIsOpenNavbar={setIsOpenNavbar}/>
-  <div id='home' className={`${isOpenNavbar?"bg-black blur-[4px]":""} w-full max-w-96 pt-10 lg:pt-22 md:max-w-[860px] lg:max-w-[1280px] grid md:grid lg:flex justify-center items-center mx-1  lg:mx-auto`}>
+  <div id='home' className={`${isOpenNavbar?"bg-black blur-[4px]":""} w-full lg:max-w-[1280px] lg:pt-15 grid md:grid lg:flex justify-center items-center lg:mx-auto`}>
 
-    <div className='w-full max-w-96 md:max-w-[840px] lg:max-w-7xl p-3 relative '> 
+    <div className='w-full lg:max-w-7xl p-3 relative '> 
       
       <Image src={image[currentIndex]}  alt='image is not exit'
-      height={0}
       width={400}
-      className='w-full max-w-7xl h-140 rounded-lg '/>
+      height={0}
+      className='w-full h-140 object-cover rounded-lg '/>
   <div className=' absolute inset-3 bg-black/50 rounded-lg p-3 '></div>
   
   <div className='absolute inset-3 h-140 bg-linear-to-r from-black/80 via-black-80  to-black-70 rounded-lg grid md:grid lg:flex justify-between'>

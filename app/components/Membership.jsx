@@ -4,7 +4,7 @@ import React from 'react'
 const Membership = () => {
   return (
     <>
-      <section className='flex justify-center items-center' id='membership'>
+      <section className='flex justify-center items-center overflow-hidden' id='membership'>
         <div
           className='w-full
           max-w-[380px]
@@ -31,7 +31,7 @@ const Membership = () => {
     hover:shadow-2xl
     w-full
     md:w-[760px]
-    lg:w-[1100px]
+    lg:w-[1200px]
     lg:h-[550px]
     h-auto
   

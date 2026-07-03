@@ -10,7 +10,7 @@ const About = () => {
           max-w-[380px]
           md:max-w-[768px]
           lg:max-w-[1280px]
-           flex  lg:justify-center items-center md:py-5 lg:py-0 py-5'>
+           flex  lg:justify-center items-center lg:py-0 py-5'>
 
   <div className=' w-1/6 md:w-1/2 lg:w-1/2 flex flex-col gap-3 md:gap-3 lg:gap-5 lg:p-10 lg:px-5 px-4 md:px-0'>
     <p className='text-red-900 w-20'>ABOUT US -------</p>
