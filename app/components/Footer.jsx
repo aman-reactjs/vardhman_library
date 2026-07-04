@@ -32,7 +32,7 @@ const Footer = () => {
               <p className='text-[12px] md:text-[10px] text-gray-600 pb-2'>Preserving knowledge, inspiring minds</p>
               <p className='text-[12px] text-gray-600'>100 feet, road</p>
               <p className='text-[12px] text-gray-600'>Agra,Uttar pradesh</p>
-              <p className='text-[10px] text-gray-600'>abcd@gmail.com | +91 8755331817</p>
+              <p className='text-[10px] text-gray-600'>honeyjain2611@gmail.com | +91 8755331817</p>
             </div>
 
             <div className='w-96 h-36 flex flex-col'>

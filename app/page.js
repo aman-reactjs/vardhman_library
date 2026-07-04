@@ -15,7 +15,7 @@ const page = () => {
   const image=[
     '/assets/library_pic1.avif',
     '/assets/library_pic2.avif',
-    '/assets/library_real_img/lib_img_9(3).jpeg'
+    '/assets/library_pic4.avif'
   ];
   
   const[currentIndex,setCurrentIndex]=useState(0)

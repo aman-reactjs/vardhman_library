@@ -28,7 +28,7 @@ const formattedDate = new Date(formData.date).toLocaleDateString(
 📅 Date: ${formattedDate}
 `;
 window.open(
-  `https://wa.me/917300717379?text=${encodeURIComponent(message)}`,
+  `https://wa.me/918755331817?text=${encodeURIComponent(message)}`,
   "_blank"
 );
   }
@@ -65,13 +65,6 @@ window.open(
     <Button variant="ghost" className=' font-extrabold px-6 md:px-10 border border-white' onClick={handleWhatsappData}>Submit</Button>
     
     <Button variant="ghost" className=' font-extrabold px-2 border border-white'
-onClick={()=>{
-     if (window.innerWidth < 768) {
-      window.location.href = "tel:+918755331817";
-    } else {
-      setShowNumber(!showNumber);
-    }
-}}
 > 
 
 <span className='block px-5 md:px-7' onClick={handleMailData}>

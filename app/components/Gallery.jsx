@@ -8,10 +8,7 @@ const showImage = [
 "/assets/library_real_img/lib_img_1.jpeg",
 "/assets/library_real_img/lib_img_3.jpeg",
 "/assets/library_real_img/lib_img_6.jpeg",
-"/assets/library_real_img/lib_img_7(1).jpeg",
-"/assets/library_real_img/lib_img_8(2).jpeg",
-"/assets/library_real_img/lib_img_9(3).jpeg",
-'/assets/library_real_img/lib_img_10(4).jpeg'
+
 ];
 
 return ( 
