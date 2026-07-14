@@ -34,10 +34,7 @@ export default function RootLayout({ children }) {
         {/* <Navbar/> */}
         {children}
         
-        <About/>
-        <WhyChooseUs/>
-        <Membership/>
-        <Gallery/>
+       
         <hr />
         <Footer/>
         </body>

@@ -2,13 +2,19 @@ import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { X } from 'lucide-react'
 import { Phone } from 'lucide-react'
+import { DayPicker } from "react-day-picker";
+
 
 const LoginPage = ({setIsRequestDemo, setShowNumber, showNumber}) => {
-  const[formData, setFormData]=useState({
-    name  : "",
+  const initialValue = {
+     name  : "",
     phone : "",
     date : ""
-  })
+  }
+  const[formData, setFormData]=useState(initialValue)
+
+
+  const [error,setError]=useState("")
 
 const formattedDate = new Date(formData.date).toLocaleDateString(
   "en-IN",
@@ -18,8 +24,28 @@ const formattedDate = new Date(formData.date).toLocaleDateString(
     year: "numeric",
   }
 );
+ 
 
+// this is for whatsapp one day demo form
   const handleWhatsappData =()=>{
+    if (!formData.name || !formData.phone || !formData.date) {
+    setError("Please fill all the fields.");
+    return;
+  }
+
+   if(formData.phone.length!==10){
+    setError('Mobile no must be 10 digits')
+    return;
+  }
+
+  if(formData.name.length<=3){
+    setError("Enter your full name")
+    return
+  }
+
+  setError("");
+  
+
     const message = `
 📚 Library Demo Registration
 
@@ -31,9 +57,28 @@ window.open(
   `https://wa.me/918755331817?text=${encodeURIComponent(message)}`,
   "_blank"
 );
+setFormData(initialValue);
   }
 
+
+  // this is for mailing one day demo form
   const handleMailData = () => {
+    if (!formData.name || !formData.phone || !formData.date) {
+    setError("Please fill all the fields.");
+    return;
+  }
+
+  if(formData.phone.length!==10){
+    setError('Mobile no must be 10 digits')
+    return;
+  }
+ if(formData.name.length<=3){
+    setError("Enter your full name")
+    return
+  }
+  setError("");
+  
+
   const subject = "Library Demo Registration";
 
   const body = `
@@ -44,22 +89,55 @@ window.open(
 📅 Date: ${formattedDate}
 `;
 
+
   window.location.href =
     `mailto:honeyjain2611@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-};
-  
-  return <>
-  <div className=' w-80 md:w-80  lg:w-96 h-105 m-20 my-20 py-10 bg-white/20 backdrop-blur-md border border-white/10 rounded-xl shadow-xl flex flex-col  gap-10 items-center text-white relative'
-  onClick={(e) => e.stopPropagation()}
 
+
+    setFormData(initialValue)
+
+};
+
+  // const today = new Date().toISOString().split("T")[0];
+
+  return <>
+  <div className=' w-96 md:w-80  lg:w-96 h-105 m-10  bg-white/20 backdrop-blur-md border border-white/10 rounded-xl shadow-xl  text-white relative'
+  onClick={(e) => e.stopPropagation()}
   >
+    {error && (
+      <p className="text-red-500 text-bold font-medium text-center">
+    {error}
+  </p>
+)}
+    <div className='py-8 flex flex-col  gap-10 items-center'>
   <h1 className='font-extrabold '>Register For One Day Demo</h1>
 
-  <input type="text" placeholder='Enter your name' className=' w-64 md:w-72 lg:w-80 px-5 py-2 border border-white rounded-lg' value={formData.name} onChange={(e)=>setFormData({...formData, name : e.target.value})}/>
+  <div className='flex justify-center gap-2 items-center'>
+<label className='lg:hidden'>Enter Name - </label>
+  <input type="text" placeholder='Enter your name' className=' w-44 md:w-44 lg:w-80 px-3 py-2 border border-white rounded-lg' value={formData.name} onChange={(e) =>
+  setFormData({
+    ...formData,
+    name: e.target.value
+    .replace(/[^a-zA-Z ]/g, "")
+    .replace(/\s{2,}/g, " ")
+    .replace(/^\s/, "")
+    .split(" ")
+    .slice(0, 3)
+    .join(" "),
+  })
+}/>
+</div>
 
-  <input type="tel" maxLength={10} placeholder='Enter your mobile number' className='w-64 md:w-72 lg:w-80 px-5 py-2 border border-white rounded-lg' value={formData.phone} onChange={(e)=>setFormData({...formData, phone : e.target.value})}/>
+  <div className='flex justify-center gap-2 items-center'>
 
-  <input type="date" placeholder='Choose Date' className='w-64 md:w-72 lg:w-80 px-5 py-2 border border-white rounded-lg' value={formData.date} onChange={(e)=>setFormData({...formData, date : e.target.value})}/>
+<label className='lg:hidden'>Mobile No - </label>
+  <input type="tel" maxLength={10} placeholder='Enter your mobile no' className=' w-44 md:w-44 lg:w-80 px-3 py-2 border border-white rounded-lg' value={formData.phone} onChange={(e)=>setFormData({...formData, phone : e.target.value.replace(/[^0-9]/g, "")})}/>
+  </div>
+  <div className='flex justify-center gap-2 items-center'>
+<label className='lg:hidden'>Select Date - </label>
+  <input type="date" placeholder='Choose Date' className=' w-44 md:w-44 lg:w-80 px-3 py-2 border border-white rounded-lg' value={formData.date} min={new Date().toISOString().split("T")[0]} onChange={(e)=>setFormData({...formData, date : e.target.value})}/>
+
+  </div>
 
   <div className='w-72 h-10 flex justify-around md:justify-between lg:justify-between '>
     <Button variant="ghost" className=' font-extrabold px-6 md:px-10 border border-white' onClick={handleWhatsappData}>Submit</Button>
@@ -75,6 +153,7 @@ window.open(
     {/* <Button onClick={()=>setIsRequestDemo(false)} variant="Destructive" '></Button> */}
     <X className='lg:hidden absolute top-2 right-2 font-extrabold hover:bg-red-700' onClick={()=>setIsRequestDemo(false)}/>
 </div>
+  </div>
   </>
 }
 

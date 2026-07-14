@@ -293,7 +293,7 @@ className='w-52 md:w-56 h-80 font-semibold text-gray-600 flex flex-col justify-e
     setIsOpenNavbar(false)
   }
 } 
-      className={` block lg:hidden p-2 cursor-pointer hover:text-pink-600`}>Request a Demo</Button>
+      className={` block lg:hidden p-2 cursor-pointer hover:text-pink-600`}>Request for one day Demo</Button>
 </div>
   </ul>
   </>

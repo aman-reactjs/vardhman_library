@@ -5,7 +5,15 @@ import { Button } from "@/components/ui/button"
 import { Phone } from 'lucide-react'
 import Navbar from './components/Navbar'
 import LoginPage from './components/LoginPage'
+import dynamic from 'next/dynamic'
+import { useInView } from "react-intersection-observer";
 
+
+// lazy loaing and this is also importing sections
+const About = dynamic(()=>import('./components/About'))
+const WhyChooseUs = dynamic(()=>import('./components/WhyChooseUs'))
+const Membership = dynamic(()=>import('./components/Membership'))
+const Gallery = dynamic(()=>import('./components/Gallery'))
 
 
 const page = () => {
@@ -18,6 +26,26 @@ const page = () => {
     '/assets/library_pic4.avif'
   ];
   
+const { ref: aboutRef, inView: aboutInView } = useInView({
+  triggerOnce: true,
+  threshold: 0.2,
+});
+
+const { ref: whyRef, inView: whyInView } = useInView({
+  triggerOnce: true,
+  threshold: 0.2,
+});
+
+const { ref: membershipRef, inView: membershipInView } = useInView({
+  triggerOnce: true,
+  threshold: 0.2,
+});
+
+const { ref: galleryRef, inView: galleryInView } = useInView({
+  triggerOnce: true,
+  threshold: 0.2,
+});
+
   const[currentIndex,setCurrentIndex]=useState(0)
   // useEffect ek bar hi render hota hai agar hum last me array lagate hai 
   useEffect(()=>{
@@ -107,6 +135,18 @@ Call Now
 
   </div>
   </div>
+  <div ref={aboutRef}>
+  {aboutInView && <About />}
+</div>
+        <div ref={whyRef}>
+  {whyInView && <WhyChooseUs />}
+</div>
+       <div ref={membershipRef}>
+  {membershipInView && <Membership />}
+</div>
+        <div ref={galleryRef}>
+  {galleryInView && <Gallery />}
+</div>
   </>
 }
 
